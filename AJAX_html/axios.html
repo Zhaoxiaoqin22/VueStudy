@@ -13,7 +13,7 @@
 <script>
   const btns = document.getElementsByTagName('button');
 
-  btns[0].addEventListener('click',function () {
+/*  btns[0].addEventListener('click',function () {
     axios.get('http://127.0.0.1:80/books/search1',{
       //url参数
         params:{
@@ -25,26 +25,54 @@
             name:"Atguigu",
             age:20
         }
-    })})
+    })})*/
 
   let book = {
-      name:'Flink on Yarn',
-      type:'BigData',
+      name:"Flink on Yarn",
+      type:"BigData",
       price:110.0
   }
 
-  var jsonBook = JSON.stringify(book);
+  let jsonBook = JSON.stringify(book);
 
+  console.log(jsonBook)
+
+/*
   btns[1].addEventListener('click',function () {
       axios.post(
           "http://127.0.0.1:80/books/add1",
           {
               params:{id:200,vip:9},//post请求行
               headers:{height:180,weight:180},//post请求头
-              data:jsonBook//post请求体
+              body:jsonBook//post请求体
           }
+      ).then(response =>{
+        console.log(response.status)
+        console.log(response.statusText)
+        console.log(response.headers)
+        console.log(response.data)
+      }
       )
   })
+*/
+
+    btns[1].addEventListener('click',function () {
+        axios.post(
+            "http://127.0.0.1:80/books/add1",
+            {
+                params:{},
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                data:jsonBook
+            }
+        )
+    })
+
+    btns[2].addEventListener('click',function () {
+
+    })
+
 
 </script>
 
