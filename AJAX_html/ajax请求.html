@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX请求</title>
+    <style>
+        #d1{
+            border-color: aquamarine;
+            width: 300px;
+            height: 200px;
+            margin: 300px;
+        }
+    </style>
+</head>
+<body>
+    <button id="b1">发送请求</button>
+    <div id="d1"></div>
+
+
+
+    <script>
+        window.addEventListener("load",function () {
+            var btn = document.getElementById('b1');
+            var div1 = document.getElementById('d1');
+
+
+            btn.addEventListener("click",function () {
+                //发送xml 的http请求
+                //新建请求
+                const xhr = new XMLHttpRequest()
+                //打开请求
+                xhr.open('GET','http://localhost:3010/')
+                //发送请求
+                xhr.send();
+                //事件绑定 处理服务端返回的结果
+                xhr.addEventListener("readystatechange",function () {
+                    if(xhr.readyState === 4){//响应状态readystate为4并且状态码为响应成功
+                        if(xhr.status>=200 && xhr.status<300){
+                            //获取响应状态码
+                            //获取状态字符串
+                            //获取响应头
+                            //获取响应体
+                            resCode = xhr.status;
+                            resString = xhr.statusText;
+                            allheaders = xhr.getAllResponseHeaders();
+                            response = xhr.response;
+
+                            //放进text里面
+                            div1.innerText = response
+                        }
+                    }else{
+                        console.log('出错了')
+                    }
+                })
+            })
+            })
+
+    </script>
+</body>
+</html>

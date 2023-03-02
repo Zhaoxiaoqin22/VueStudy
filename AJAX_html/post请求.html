@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax发送post请求</title>
+    <style>
+      .di{
+        width: 200px;
+        height: 100px;
+        background-color: aquamarine;
+      }
+    </style>
+</head>
+<body>
+  <div id="d1" class="di">
+    Flink on Yarn and practice
+  </div>
+  <div class="di">
+    DataLake and DataWarehouse
+  </div>
+  <div class="di">
+    new_MidSoft-StreamPark
+  </div>
+  <div class="di">
+    DataCenter:ALLData
+  </div>
+
+  <div id="last">展示部分</div>
+
+<script>
+  var divs = document.getElementsByTagName('div');
+
+  var showOn = divs[4];
+
+  for(let i=0;i<divs.length;i++){
+    divs[i].setAttribute('id',i+1)//给每个div设置一个id属性
+  }
+
+  for(let i=0;i<divs.length-1;i++) {
+    //给每个书本绑定一个事件，只要放上这个div去了，发送一条post请求，就给返回一条信息
+    divs[i].addEventListener('mouseover', function () {
+      //发送post请求，post请求信息在请求体里
+      //要发送的post 请求body信息转为json格式
+        let book = {
+            name:this.innerHTML,
+            type:"bigdata",
+            price:90
+        }
+
+      let bookToSend = JSON.stringify(book);
+        //定义我们的ajax请求，当事件触发才启动
+        var ajax = new XMLHttpRequest();
+
+        ajax.open('POST','https://127.0.0.1:80/books/add')
+        //ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+        let str = "gangdam"
+        ajax.send(1)
+
+      ajax.addEventListener('readystatechange',function () {
+        if(ajax.readyState === 4){
+          if(ajax.status >=200&&ajax.status<300){
+             showOn.innerHTML = ajax.response
+          }
+        }
+      })
+
+
+    })
+  }
+</script>
+
+</body>
+</html>

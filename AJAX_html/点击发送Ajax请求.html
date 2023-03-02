@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax GET 请求</title>
+    <style>
+      #result{
+        width: 200px;
+        height: 100px;
+        border: solid 1px #90b;
+      }
+    </style>
+</head>
+<body>
+    <button>点击发送请求</button>
+    <div id="result"></div>
+
+    <script>
+      //获取button元素
+      var div = document.getElementById('result');
+      var  btns = document.getElementsByTagName('button');
+      var btn = btns[0];
+
+      btn.addEventListener('click',function () {
+          //新建一个ajax请求
+          var xhr = new XMLHttpRequest();
+          //行信息
+          //xhr.open('GET','http://127.0.0.1:80/books/search/5')
+        //xhr.open('GET','http://127.0.0.1:3010/server')
+          xhr.open('GET','http://127.0.0.1:80/books/search?name=GaoHaoxin&age=25')
+          xhr.send()
+
+        //事件绑定，当处理readyState改变并且状态为4，那么得到返回信息
+          xhr.addEventListener('readystatechange',function (){
+            if(xhr.readyState === 4){
+              if(xhr.status === 200){
+                console.log(xhr.status)//响应状态码
+                console.log(xhr.statusText)//响应状态字符串
+                console.log(xhr.getAllResponseHeaders())//响应头
+                //响应体：
+                div.innerText =  xhr.response
+              }
+            }
+          })
+      })
+
+    </script>
+
+</body>
+</html>

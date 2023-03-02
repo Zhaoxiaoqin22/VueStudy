@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios测试</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
+</head>
+<body>
+  <button>GET</button>
+  <button>POST</button>
+  <button>AJAX</button>
+
+<script>
+  const btns = document.getElementsByTagName('button');
+
+  btns[0].addEventListener('click',function () {
+    axios.get('http://127.0.0.1:80/books/search1',{
+      //url参数
+        params:{
+        id:100,
+        name:"goudan"
+      },
+
+        header:{
+            name:"Atguigu",
+            age:20
+        }
+    })})
+
+  let book = {
+      name:'Flink on Yarn',
+      type:'BigData',
+      price:110.0
+  }
+
+  var jsonBook = JSON.stringify(book);
+
+  btns[1].addEventListener('click',function () {
+      axios.post(
+          "http://127.0.0.1:80/books/add1",
+          {
+              params:{id:200,vip:9},//post请求行
+              headers:{height:180,weight:180},//post请求头
+              data:jsonBook//post请求体
+          }
+      )
+  })
+
+</script>
+
+</body>
+</html>
