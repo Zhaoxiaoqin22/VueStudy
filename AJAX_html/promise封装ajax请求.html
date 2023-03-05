@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise封装ajax请求</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap-grid.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+      <h2 class="page-header">Promise封装AJAX操作</h2>
+      <button id="btn">点击发送AJAX</button>
+      <div id="showOn"></div>
+    </div>
+
+  <script>
+    const btn = document.getElementById('btn')
+    const showOn = document.getElementById('showOn');
+
+    btn.addEventListener('click',function () {
+      const xhr = new XMLHttpRequest()
+      xhr.open('GET','http://127.0.0.1:80/books/searchAll')
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+      xhr.send()
+
+      //获取返回信息
+      xhr.addEventListener('readystatechange',function () {
+        //promise
+        let p = new Promise((resolve,reject)=>{
+          if(xhr.readyState===4&&xhr.status===200) resolve(xhr)
+          else{reject(xhr)}
+        })
+
+        p.then(
+                xhr=>{showOn.innerHTML = xhr.response+' '+xhr.statusText},//如果响应完成并成功那么展示内容
+                xhr=>{showOn.innerHTML = xhr.status + " "+xhr.statusText}//如果不是，那么响应状态和状态字符串
+        )
+
+      })
+    })
+
+  </script>
+
+</body>
+</html>

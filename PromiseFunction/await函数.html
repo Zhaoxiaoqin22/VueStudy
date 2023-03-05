@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <script>
+    async function as(){
+
+/*        let aw = await new Promise((resolve,reject)=>{
+          if(1===1){resolve('狗蛋')}
+            else{reject('狗蛋知错了！')}
+        });
+
+        let res = await 20;
+        console.log(aw)*/
+      /**
+       * 如果promise是失败状态：
+       */
+    try {
+      let res = await new Promise((resolve, reject) => {
+        reject('狗蛋')
+      })
+    }catch (e){
+      console.log(e)
+    }
+
+
+    }
+
+    as()
+
+
+
+  </script>
+
+</body>
+</html>

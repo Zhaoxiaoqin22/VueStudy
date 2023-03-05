@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+  let r = Math.random()*10
+  let result = Promise.race([Promise.resolve(10),Promise.reject(11)])
+  console.log(result)
+
+</script>
+</body>
+</html>
